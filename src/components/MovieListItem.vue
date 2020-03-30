@@ -1,8 +1,13 @@
 <template>
-  <div
-    @click="toDetails">
+  <router-link
+    title="to go Details"
+    :to="{path: routerTo}">
     {{ movie.Title }}
-  </div>
+  </router-link>
+  <!--<div-->
+    <!--@click="toDetails">-->
+    <!--{{ movie.Title }}-->
+  <!--</div>-->
 </template>
 
 <script lang="ts">

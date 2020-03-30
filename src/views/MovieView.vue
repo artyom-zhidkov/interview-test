@@ -1,25 +1,29 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div class="page-layout">
-    <h1>{{MovieDetail.Title}}</h1>
-    <img :src="`${MovieDetail.Poster}`" alt="Poster">
-    <div class="wrapper">
-      <v-simple-table
-        dense
-        class="list-details">
-        <template>
-          <tbody>
-          <tr v-for="(value, key) in MovieDetail" :key="key">
-            <td>{{ key }}</td>
-            <td>{{ value }}</td>
-          </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </div>
+  <div class="wrapper wrapper_details">
+    <h1>{{movieDetail.Title}}</h1>
+    <img
+      v-if="isShowPoster"
+      :src="`${movieDetail.Poster}`"
+      alt="Poster"
+      class="poster">
+    <v-simple-table
+      :dense="true">
+      <template
+        v-slot:default>
+        <tbody>
+        <tr v-for="(value, key) in movieDetail" :key="key">
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
     <v-btn
       class="button-primary"
       color="primary"
-      @click="goHome">Go to HOME page
+      @click="goHome">
+      <v-icon left>mdi-reply</v-icon>
+      <span>Return</span>
     </v-btn>
   </div>
 </template>
@@ -32,12 +36,19 @@ export default Vue.extend({
   name: 'MovieView',
   computed: {
     ...mapState({
-      MovieDetail: (state) => state.MovieDetail,
+      movieDetail: (state) => state.movieDetail,
     }),
+    isShowPoster() {
+      return this.movieDetail.Poster !== 'N/A';
+    },
   },
-  created() {
+  destroyed() {
+    this.$store.commit('setMovieDetail', []);
+  },
+  async created() {
     const { movieId } = this.$route.params;
-    this.$store.dispatch('getSpecificMovie', movieId);
+    await this.$store.dispatch('getSpecificMovie', movieId);
+    window.scrollTo(0, 0);
   },
   methods: {
     goHome() {
@@ -48,8 +59,17 @@ export default Vue.extend({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-  .list-details{
-    width: 80%;
+<style lang="scss">
+  .wrapper_details {
+    width: 1200px;
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      width: 100%;
+    }
+  }
+
+  .poster {
+    margin: 15px auto;
   }
 </style>

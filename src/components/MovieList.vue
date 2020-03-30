@@ -1,39 +1,40 @@
 <template>
-  <div>
-    <Filters
-      @selected="onSelected"/>
-    <div class="wrapper">
+  <div class="wrapper">
+      <Filters
+        @selected="onSelected"></Filters>
       <v-simple-table
-        :dense="true"
-        class="movie-list">
-        <template v-slot:default>
-          <tbody>
-          <tr v-for="(movie, index) in movies" :key="index">
-            <td>
-              {{index + 1}}
-            </td>
-            <td>
-              <MovieListItem
-                :key="movie.imdbID"
-                :movie="movie">
-              </MovieListItem>
-            </td>
-            <td>
-              {{movie.Type}}
-            </td>
-          </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-    </div>
-    <v-btn
+      :dense="true">
+      <template v-slot:default>
+        <thead>
+        <tr>
+          <th class="text-left">number</th>
+          <th class="text-left">title</th>
+          <th class="text-left">type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(movie, index) in movies" :key="index">
+          <td>
+            {{index + 1}}
+          </td>
+          <td>
+            <MovieListItem
+              :key="movie.imdbID"
+              :movie="movie">
+            </MovieListItem>
+          </td>
+          <td>
+            {{movie.Type}}
+          </td>
+        </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <Button
       ref="loadMore"
-      v-show="isShowLoadMore"
-      class="button-primary"
-      color="primary"
-      :loading="isLoading"
-      @click="loadMore">Load More
-    </v-btn>
+      :isShowLoadMore="isShowLoadMore"
+      :isLoading="isLoading"
+      @click="loadMore"></Button>
   </div>
 </template>
 
@@ -41,6 +42,7 @@
 import Vue from 'vue';
 import { mapState } from 'vuex';
 import Filters from '@/components/Filters.vue';
+import Button from '@/components/Button.vue';
 import MovieListItem from './MovieListItem.vue';
 
 export default Vue.extend({
@@ -89,6 +91,7 @@ export default Vue.extend({
   components: {
     MovieListItem,
     Filters,
+    Button,
   },
 });
 </script>
@@ -97,10 +100,12 @@ export default Vue.extend({
 <style lang="scss">
   .wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 700px;
+    margin: auto;
 
-    .movie-list{
-      width: 30%;
+    @media screen and (max-width: 700px) {
+      width: auto;
     }
 
     td {
@@ -109,6 +114,6 @@ export default Vue.extend({
   }
 
   .button-primary {
-    margin: 20px 0;
+    margin: 20px auto;
   }
 </style>

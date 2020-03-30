@@ -26,7 +26,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  padding: 2% 1%;
+  padding: 2%;
+  tr:hover {
+    background: white;
+  }
 }
 
 #nav {
@@ -40,5 +43,6 @@ export default {
       color: #42b983;
     }
   }
+
 }
 </style>

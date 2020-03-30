@@ -1,6 +1,9 @@
 <template>
   <div class="page-layout">
-    <img alt="Batman logo" src="../assets/logo.png" />
+    <img
+      alt="Batman logo"
+      src="../assets/logo.png"
+      class="logo"/>
     <HelloWorld :msg="msg"/>
     <MovieList />
   </div>
@@ -31,5 +34,12 @@ export default {
 <style lang="scss">
   .page-layout {
     text-align: center;
+  }
+
+  .logo {
+    height: auto;
+    @media screen and (max-width: 750px) {
+      width: 100%;
+    }
   }
 </style>

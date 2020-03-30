@@ -12,7 +12,7 @@ export default new Vuex.Store({
       apiToken: '273b9080',
     },
     movies: [] as Movie[],
-    MovieDetail: [] as MovieDetail[],
+    movieDetail: [] as MovieDetail[],
     isShowAlert: false,
     messageForAlert: '',
     totalResults: 20,
@@ -23,7 +23,7 @@ export default new Vuex.Store({
       state.movies = [...state.movies, ...payload];
     },
     setMovieDetail(state, payload) {
-      state.MovieDetail = payload;
+      state.movieDetail = payload;
     },
     setTotalResults(state, payload) {
       state.totalResults = payload;

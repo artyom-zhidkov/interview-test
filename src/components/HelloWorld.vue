@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div>
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -17,7 +17,4 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .header {
-    padding-bottom: 20px;
-  }
 </style>

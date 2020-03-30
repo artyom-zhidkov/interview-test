@@ -11,6 +11,10 @@ const routes = [
     component: Home,
   },
   {
+    path: '/movies',
+    redirect: '/',
+  },
+  {
     path: '/movies/:movieId',
     name: 'MovieView',
     // route level code-splitting
